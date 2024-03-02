@@ -19,9 +19,9 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ../mysql-data:/var/lib/mysql
-      - ../dumps/00000000_dump_db_dev.sql:/docker-entrypoint-initdb.d/00000000_dump_db_dev.sql
-      - ../db-migration:/docker-entrypoint-initdb.d
+      - ./db/mysql-data:/app/mysql
+      - ./db/dumps/00000000_dump_db_dev.sql:/app/docker-entrypoint-initdb.d/00000000_dump_db_dev.sql
+      - ./db/db-migration:/app/docker-entrypoint-initdb.d
     restart: always
     command: --default-authentication-plugin=mysql_native_password
 
