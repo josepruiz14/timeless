@@ -1,43 +1,21 @@
-const express = require('express');
-const cors = require('cors');
+import express, { json } from 'express'
+import cors from 'cors'
+import { tasksRouter } from './routes/tasks.routes.js'
 
-const app = express();
+const app = express()
 app.disable('x-powered-by')
 
-app.use(cors());
-app.use(express.json())
-// app.use((req, res, next) => {
-//   //Middleware
-//   if (req.method !== 'POST') return next()
-//   if (req.headers['content-type'] !== 'application/json') return next()
-
-//   let body = ''
-//   req.on('data', chunk => {
-//     body += chunk.toString()
-//   })
-
-//   req.on('end', () => {
-//     const data = JSON.parse(body)
-//     data.timestamp = Date.now()
-//     req.body = data
-//     next()
-//   })
-// })
-
+app.use(cors())
+app.use(json())
 
 app.get('/', (req, res) => {
   res.json({
     sucess: true,
     message: 'Timelezz Up!'
   })
-});
-
-app.post('/task', (req, res) => {
-  res.status(201).json({
-    sucess: true,
-    message: req.body
-  })
 })
+
+app.use('/tasks', tasksRouter)
 
 app.use((req, res) => {
   res.status(404).json({
@@ -47,5 +25,5 @@ app.use((req, res) => {
 })
 const port = process.env.PORT || 3000
 app.listen(port, () => {
-  console.log(`${'listening for requests on port 3000'}`);
-});
+  console.log(`${'listening for requests on port 3000'}`)
+})

@@ -8,3 +8,20 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+  db:
+    container_name: MySQL
+    image: mysql/mysql-server:8.0.32-1.2.11-server
+    environment:
+      MYSQL_DATABASE: timelezz
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - '3306:3306'
+    volumes:
+      - ../mysql-data:/var/lib/mysql
+      - ../dumps/00000000_dump_db_dev.sql:/docker-entrypoint-initdb.d/00000000_dump_db_dev.sql
+      - ../db-migration:/docker-entrypoint-initdb.d
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+
