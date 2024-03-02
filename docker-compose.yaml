@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  node:
+    build: ./node
+    container_name: node
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./node:/app
+      - /app/node_modules

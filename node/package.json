@@ -1,0 +1,33 @@
+{
+  "name": "timeless",
+  "version": "1.0.0",
+  "description": "Work time manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -L index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josepruiz14/timeless.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Josep Ruiz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josepruiz14/timeless/issues"
+  },
+  "homepage": "https://github.com/josepruiz14/timeless#readme",
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "4.18.3"
+  },
+  "eslintConfig": {
+    "extends": "semistandard"
+  },
+  "devDependencies": {
+    "semistandard": "17.0.0"
+  }
+}
