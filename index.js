@@ -1,6 +1,7 @@
 import express, { json } from 'express'
 import cors from 'cors'
 import { tasksRouter } from './routes/tasks.routes.js'
+import { recordsRouter } from './routes/records.routes.js'
 
 const app = express()
 app.disable('x-powered-by')
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/tasks', tasksRouter)
+app.use('/tasks', recordsRouter)
 
 app.use((req, res) => {
   res.status(404).json({
