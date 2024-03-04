@@ -1,8 +1,8 @@
 export class TaskController {
-  static async sendTask (req, res) {
+  static async sendTask(req, res) {
     res.status(201).json({
       sucess: true,
-      message: req.body
-    })
+      message: req.body,
+    });
   }
 }

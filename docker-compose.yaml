@@ -1,23 +1,27 @@
 version: '3.8'
 services:
   node:
+    depends_on:
+      - db
     build: .
     container_name: node
     ports:
       - '3000:3000'
     volumes:
       - .:/app
-      - ./app/node_modules
+      - /app/node_modules
   db:
     container_name: MySQL
     image: mysql/mysql-server:8.0.32-1.2.11-server
+    env_file: 
+      - ./.env
     environment:
-      MYSQL_DATABASE: timelezz
-      MYSQL_ROOT_PASSWORD: test
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
     ports:
-      - '3306:3306'
+      - $DB_PORT:$DB_PORT
     volumes:
       - ./db/mysql-data:/app/mysql
       - ./db/dumps/00000000_dump_db_dev.sql:/app/docker-entrypoint-initdb.d/00000000_dump_db_dev.sql
