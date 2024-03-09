@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `records`
+-- Table structure for table `record`
 --
 
-DROP TABLE IF EXISTS `records`;
+DROP TABLE IF EXISTS `record`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `records` (
+CREATE TABLE `record` (
   `id` binary(16) NOT NULL DEFAULT (uuid_to_bin(uuid())),
   `task_id` binary(16) NOT NULL,
   `start` time NOT NULL,
@@ -30,27 +30,27 @@ CREATE TABLE `records` (
   `date` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `task_id` (`task_id`),
-  CONSTRAINT `records_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`)
+  CONSTRAINT `record_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `records`
+-- Dumping data for table `record`
 --
 
-LOCK TABLES `records` WRITE;
-/*!40000 ALTER TABLE `records` DISABLE KEYS */;
-/*!40000 ALTER TABLE `records` ENABLE KEYS */;
+LOCK TABLES `record` WRITE;
+/*!40000 ALTER TABLE `record` DISABLE KEYS */;
+/*!40000 ALTER TABLE `record` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tasks`
+-- Table structure for table `task`
 --
 
-DROP TABLE IF EXISTS `tasks`;
+DROP TABLE IF EXISTS `task`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tasks` (
+CREATE TABLE `task` (
   `id` binary(16) NOT NULL DEFAULT (uuid_to_bin(uuid())),
   `user_id` binary(16) NOT NULL,
   `name` varchar(256) NOT NULL,
@@ -58,27 +58,27 @@ CREATE TABLE `tasks` (
   `description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `task_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tasks`
+-- Dumping data for table `task`
 --
 
-LOCK TABLES `tasks` WRITE;
-/*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
+LOCK TABLES `task` WRITE;
+/*!40000 ALTER TABLE `task` DISABLE KEYS */;
+/*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `users`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `id` binary(16) NOT NULL DEFAULT (uuid_to_bin(uuid())),
   `username` varchar(24) NOT NULL,
   `password` varchar(256) NOT NULL,
@@ -87,12 +87,13 @@ CREATE TABLE `users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (_binary '\Ùòn\Î\ﬁYÓ´èB¨\Z\0','josep','pass');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -108,4 +109,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-03 18:54:52
+-- Dump completed on 2024-03-09 23:01:44
