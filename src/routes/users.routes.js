@@ -4,7 +4,7 @@ import { UserController } from '../controllers/index.js';
 export const usersRouter = Router();
 
 usersRouter.get('/', UserController.getUsers);
-// usersRouter.post('/', UserController.sendTask); // TODO
+usersRouter.post('/', UserController.createUser); // TODO
 
 // usersRouter.get('/:id', UserController.sendTask); // TODO
 // usersRouter.put('/:id', UserController.sendTask); // TODO

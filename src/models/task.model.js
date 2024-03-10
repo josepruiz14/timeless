@@ -1,37 +1,47 @@
-import { Sequelize, Model } from "sequelize";
-import { db } from '../../db/db.js';
-import { Record } from "./record.model.js";
+'use strict';
+import { Model } from 'sequelize';
+export default (sequelize, DataTypes) => {
+  class Task extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
 
-
-export class Task extends Model { }
-
-Task.init({
+  Task.init({
     id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true,
+      type: sequelize.UUID,
+      defaultValue: sequelize.UUIDV4,
+      primaryKey: true,
     },
     userId: {
-        type: Sequelize.UUID,
-        field: 'user_id'
+      type: sequelize.UUID,
+      field: 'user_id'
     },
     name: {
-        type: Sequelize.STRING(256),
+      type: sequelize.STRING(256),
+      allowNull: false,
     },
     code: {
-        type: Sequelize.STRING(50),
+      type: sequelize.STRING(50),
     },
     description: {
-        type: Sequelize.STRING(500),
+      type: sequelize.STRING(500),
     }
-}, {
+  }, {
     sequelize: db,
-    // timestamps: true,
-    // createdAt: 'created_at',
-    // updatedAt: 'updated_at',
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
     modelName: 'task',
     tableName: 'task',
-})
+  })
 
-Task.hasMany(Record)
-Record.belongsTo(Task)
+  Task.hasMany(Record)
+  Record.belongsTo(Task)
+  return Task;
+};

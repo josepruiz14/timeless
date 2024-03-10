@@ -1,6 +1,5 @@
-import { Router } from 'express'
-
-export const recordsRouter = Router()
+const Router = require('express')
+const recordsRouter = Router()
 
 recordsRouter.post('/', (req, res) => {
   res.status(201).json({
@@ -8,3 +7,6 @@ recordsRouter.post('/', (req, res) => {
     message: req.body
   })
 })
+
+
+module.exports = { recordsRouter }

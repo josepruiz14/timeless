@@ -1,6 +1,6 @@
-import express, { json } from 'express';
-import cors from 'cors';
-import { tasksRouter, recordsRouter, usersRouter } from './src/routes/index.js';
+const express = require('express');
+const cors = require('cors');
+const { tasksRouter, recordsRouter, usersRouter } = require('./src/routes/index.js');
 
 try {
   const app = express();
