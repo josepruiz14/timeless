@@ -12,6 +12,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+    command: sh -c "node wait-for-it.js db:$DB_PORT"
   db:
     container_name: MySQL
     image: mysql/mysql-server:8.0.32-1.2.11-server
