@@ -1,9 +1,10 @@
 'use strict';
 
-import { readdirSync } from 'fs';
-import { basename as _basename, join } from 'path';
-import Sequelize, { DataTypes } from 'sequelize';
-import { env as _env } from 'process';
+const fs = require('fs');
+const { basename: _basename, join } = require('path');
+const Sequelize = require('sequelize');
+const { env: _env } = require('process');
+const { DataTypes } = Sequelize;
 const basename = _basename(__filename);
 const env = _env.NODE_ENV || 'development';
 const config = require(__dirname + '/../../db/config/config.js')[env];
@@ -16,7 +17,7 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-readdirSync(__dirname)
+fs.readdirSync(__dirname)
   .filter(file => {
     return (
       file.indexOf('.') !== 0 &&
@@ -39,4 +40,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export default db;
+module.exports = db;

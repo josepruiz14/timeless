@@ -1,16 +1,14 @@
-import { User } from "../models/user.model"
-export class UserController {
+const { User } = require('../models');
+module.exports = class UserController {
   static async getUsers(req, res) {
-    let users = ''
+    let users = '';
     try {
-      users = await User.findAll()
-      if (users) users = users.getPlain(true)
+      users = await User.findAll();
+      if (users) users = users.getPlain(true);
       console.log('❗❗❗❗❗❗ ~ TaskController ~ getUsers ~ users:', users);
     } catch (error) {
       console.log('❗❗❗❗❗❗ ~ UserController ~ getUsers ~ error:', error);
-
     }
-
 
     res.status(200).json({
       sucess: true,
@@ -19,15 +17,15 @@ export class UserController {
   }
 
   static async createUser(req, res) {
-    const { username, password } = req.body
-    let user = ''
+    const { username, password } = req.body;
+    let user = '';
     try {
       user = await User.create({
         username,
-        password
-      })
+        password,
+      });
       console.log('❗❗❗❗❗❗ ~ TaskController ~ getUsers ~ users:', user);
-      if (user) user = user.getPlain(true)
+      if (user) user = user.getPlain(true);
     } catch (error) {
       console.log('❗❗❗❗❗❗ ~ UserController ~ getUsers ~ error:', error);
     }
@@ -37,4 +35,4 @@ export class UserController {
       message: user,
     });
   }
-}
+};

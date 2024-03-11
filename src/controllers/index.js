@@ -1,3 +1,6 @@
-export { TaskController } from './tasks.controller.js';
-export { UserController } from './users.controller.js';
-
+const TaskController = require('./tasks.controller.js');
+const UserController = require('./users.controller.js');
+module.exports = {
+  TaskController,
+  UserController,
+};

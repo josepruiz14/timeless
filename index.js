@@ -1,23 +1,26 @@
 const express = require('express');
 const cors = require('cors');
-const { tasksRouter, recordsRouter, usersRouter } = require('./src/routes/index.js');
+const { json } = require('express');
+const { tasksRouter, recordsRouter, usersRouter } = require('./src/routes');
 
 try {
   const app = express();
   app.disable('x-powered-by');
 
   app.use(cors());
-  app.use(json());
+  app.use(express.json());
 
   app.get('/', (req, res) => {
     res.json({
-      sucess: true,
+      success: true,
       message: 'Timelezz Up!',
     });
   });
+
+  // Define routes using routers
   app.use('/tasks', tasksRouter);
   app.use('/users', usersRouter);
-  app.use('/tasks', recordsRouter);
+  app.use('/records', recordsRouter);
 
   app.use((req, res) => {
     res.status(404).json({
@@ -25,12 +28,11 @@ try {
       message: 'Unable to find service',
     });
   });
+
   const port = process.env.PORT || 3000;
   app.listen(port, () => {
-    console.log(`${'listening for requests on port 3000'}`);
+    console.log(`listening for requests on port ${port}`);
   });
 } catch (error) {
   console.log(error);
-
 }
-

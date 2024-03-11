@@ -1,8 +1,8 @@
-const recordsRouter = require('./records.routes')
-const usersRouter = require('./tasks.routes')
-const tasksRouter = require('./users.routes')
+const recordsRouter = require('./records.routes');
+const tasksRouter = require('./tasks.routes');
+const usersRouter = require('./users.routes');
 module.exports = {
-    recordsRouter,
-    usersRouter,
-    tasksRouter
-}
+  recordsRouter,
+  usersRouter,
+  tasksRouter,
+};
