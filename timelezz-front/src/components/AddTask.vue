@@ -1,23 +1,42 @@
 <template>
-   <div id="popup" class="popup" v-if="show">
+  <div id="popup" class="popup" v-if="show">
     <div class="popup-content">
-      <span class="close">&times;</span>
-      <h2>Popup Title</h2>
-      <p>This is a simple popup.</p>
-      <button @click="addTaskToList">Add Task</button>
+      <h2>Add your new task</h2>
+      <form class="add-task-form" @submit="addTaskToList">
+        <div class="form-field">
+          <label>Title</label>
+          <input type="text" v-model="title" />
+        </div>
+        <div class="form-field">
+          <label>Date</label>
+          <input v-model="date" type="date" />
+        </div>
+        <div class="form-field">
+          <label>Description</label>
+          <input v-model="desc" type="text" />
+        </div>
+        <input type="submit" value="Add Task" />
+      </form>
     </div>
   </div>
 </template>
 <script setup>
+import { ref } from 'vue'
 
- defineProps(['show'])
+defineProps(['show'])
 
- const emits = defineEmits(['addTask'])
+const emits = defineEmits(['addTask'])
 
- function addTaskToList(){
-  emits('addTask'
-  )
- }
+const title = ref('')
+const desc = ref('')
+const date = ref('')
+
+function addTaskToList() {
+  emits('addTask', { title: title.value, description: desc.value, date: date.value })
+  title.value = ''
+  desc.value = ''
+  date.value = ''
+}
 
 //  function showPop(){
 //     emit('show')
@@ -25,11 +44,12 @@
 //  }
 </script>
 <style>
-    body {
+body {
   font-family: Arial, sans-serif;
 }
 
 .popup {
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -41,7 +61,7 @@
 }
 
 .popup-content {
-  background-color: white;
+  background-color: rgb(17, 17, 17);
   padding: 20px;
   border-radius: 5px;
   width: 300px;
@@ -56,4 +76,14 @@
   cursor: pointer;
 }
 
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+}
 </style>
