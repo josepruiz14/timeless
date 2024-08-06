@@ -1,6 +1,7 @@
 <template>
   <div id="popup" class="popup" v-if="show">
     <div class="popup-content">
+      <button class="close" @click="close">×</button>
       <h2>Add your new task</h2>
       <form class="add-task-form" @submit="addTaskToList">
         <div class="form-field">
@@ -15,7 +16,7 @@
           <label>Description</label>
           <input v-model="desc" type="text" />
         </div>
-        <input type="submit" value="Add Task" />
+        <button type="submit" value="Add Task">Add task</button>
       </form>
     </div>
   </div>
@@ -25,7 +26,7 @@ import { ref } from 'vue'
 
 defineProps(['show'])
 
-const emits = defineEmits(['addTask'])
+const emits = defineEmits(['addTask', 'updateShow'])
 
 const title = ref('')
 const desc = ref('')
@@ -38,16 +39,16 @@ function addTaskToList() {
   date.value = ''
 }
 
+function close() {
+  emits('updateShow')
+}
+
 //  function showPop(){
 //     emit('show')
 //     mustShow.value = !mustShow.value
 //  }
 </script>
-<style>
-body {
-  font-family: Arial, sans-serif;
-}
-
+<style scoped>
 .popup {
   display: flex;
   position: fixed;
@@ -61,29 +62,23 @@ body {
 }
 
 .popup-content {
-  background-color: rgb(17, 17, 17);
   padding: 20px;
   border-radius: 5px;
   width: 300px;
   text-align: center;
 }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.add-task-form {
-  display: flex;
-  flex-direction: column;
-}
-
 .form-field {
+  padding: 0.5rem;
+}
+
+.form-field > * {
+  flex-direction: row;
   display: flex;
-  justify-content: space-between;
-  padding: 2%;
+  padding: 0.5rem;
+}
+.close {
+  display: flex;
+  
 }
 </style>

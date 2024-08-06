@@ -26,8 +26,4 @@ function deleteTask() {
 }
 </script>
 
-<style>
-.all {
-  display: flex;
-}
-</style>
+<style></style>
